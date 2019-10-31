@@ -1,5 +1,6 @@
 import { StateProp } from './decorators/state-prop/state-prop.decorator';
 import { State } from './state';
+import { TestBed } from '@angular/core/testing';
 
 interface StateProps {
   bool: boolean;
@@ -23,11 +24,13 @@ describe('State', () => {
   let state: TestState;
 
   beforeEach(() => {
-    state = new TestState();
-  });
+    TestBed.configureTestingModule({
+      providers: [
+        TestState
+      ]
+    });
 
-  afterEach(() => {
-    state = null;
+    state = TestBed.get(TestState);
   });
 
   it('should create an instance', () => {

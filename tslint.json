@@ -6,6 +6,18 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "directive-selector": [
+      true,
+      "attribute",
+      "lib",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "lib",
+      "kebab-case"
+    ],
     "deprecation": {
       "severity": "warning"
     },
@@ -75,6 +87,6 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
   }
 }

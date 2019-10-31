@@ -5,31 +5,31 @@
   "projects": {
     "ngx-state": {
       "projectType": "library",
-      "root": "projects/ngx-state",
-      "sourceRoot": "projects/ngx-state/src",
+      "root": "",
+      "sourceRoot": "src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-state/tsconfig.lib.json",
-            "project": "projects/ngx-state/ng-package.json"
+            "tsConfig": "tsconfig.lib.json",
+            "project": "ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-state/src/test.ts",
-            "tsConfig": "projects/ngx-state/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-state/karma.conf.js"
+            "main": "src/test.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-state/tsconfig.lib.json",
-              "projects/ngx-state/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
