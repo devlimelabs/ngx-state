@@ -1,0 +1,51 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: angular/ngcontainer
+
+    working_directory: ~/ngx-state
+
+    steps:
+      # CHECKOUT CODE
+      - checkout
+
+      # DOWNLOAD AND CACHE DEPENDENCIES
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+
+      # INSTALL GLOBAL DEPENDENCIES
+      - run:
+          name: Install Global Dependencies
+          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3
+
+      # INSTALL APP DEPENDENCIES
+      - run:
+          name: Install App Dependencies
+          command: yarn install --ignore-scripts
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - ./node_modules
+
+      # RUN LINTING
+      - run:
+          name: TSlint
+          command: yarn lint
+
+      # # RUN TESTS
+      - run:
+          name: Angular Unit Tests  && Codecov Coverage
+          command: xvfb-run -a yarn test:ci
+
+      # # REPORT TEST COVERAGE
+      - run:
+          name: Report to Codecov
+          command: bash <(curl -s https://codecov.io/bash)
+
+      # RUN BUILD
+      - run:
+          name: Build Angular App
+          command: yarn build:prod --progress=false

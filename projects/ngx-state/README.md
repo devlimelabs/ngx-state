@@ -1,4 +1,5 @@
-# NgxState
+# ngx-state
+[![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master)
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.7.
 
