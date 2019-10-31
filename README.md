@@ -1,5 +1,7 @@
 # NgxState
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/devlimelabs/ngx-state.svg)](https://greenkeeper.io/)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
 
 ## Development server
