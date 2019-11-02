@@ -22,7 +22,7 @@ jobs:
       # INSTALL APP DEPENDENCIES
       - run:
           name: Install App Dependencies
-          command: yarn install --ignore-scripts
+          command: yarn install
 
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
@@ -35,7 +35,41 @@ jobs:
           name: TSlint
           command: yarn lint
 
-      # # RUN TESTS
+      # RUN BUILD
+      - run:
+          name: Build Library
+          command: yarn build
+
+  test:
+    docker:
+      - image: angular/ngcontainer
+
+    working_directory: ~/ngx-state
+
+    steps:
+      # CHECKOUT CODE
+      - checkout
+
+      # DOWNLOAD AND CACHE DEPENDENCIES
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+
+      # INSTALL GLOBAL DEPENDENCIES
+      - run:
+          name: Install Global Dependencies
+          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3
+
+      # INSTALL APP DEPENDENCIES
+      - run:
+          name: Install App Dependencies
+          command: yarn install
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - ./node_modules
+    # # RUN TESTS
       - run:
           name: Angular Unit Tests  && Codecov Coverage
           command: xvfb-run -a yarn test:ci
@@ -45,7 +79,11 @@ jobs:
           name: Report to Codecov
           command: bash <(curl -s https://codecov.io/bash)
 
-      # RUN BUILD
-      - run:
-          name: Build Library
-          command: yarn build
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
