@@ -1,4 +1,4 @@
-# ngx-state [![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master) [![codecov](https://codecov.io/gh/devlimelabs/ngx-state/branch/master/graph/badge.svg)](https://codecov.io/gh/devlimelabs/ngx-state)
+# ngx-state [![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master) [![codecov](https://codecov.io/gh/devlimelabs/ngx-state/branch/master/graph/badge.svg)](https://codecov.io/gh/devlimelabs/ngx-state) [![Greenkeeper badge](https://badges.greenkeeper.io/devlimelabs/ngx-state.svg)](https://greenkeeper.io/)
 
 Simple state management for Angular apps!
 
