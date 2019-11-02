@@ -11,10 +11,14 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "dependencies": {
+    "@wishtack/rx-scavenger": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.7",
     "@angular/core": "^8.2.7",
     "core-js": "^3.0.0",
+    "lodash": "4.17.15",
     "rxjs": "~6.4.0"
   },
   "devDependencies": {
@@ -28,26 +32,27 @@
     "@angular/language-service": "~8.2.7",
     "@angular/platform-browser": "^8.2.13",
     "@angular/platform-browser-dynamic": "^8.2.13",
-    "@types/jasmine": "~3.3.8",
+    "@types/jasmine": "~3.4.5",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "~12.12.5",
     "codelyzer": "^5.0.0",
     "core-js": "^3.0.0",
-    "jasmine-core": "~3.4.0",
+    "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.1.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma": "~4.4.1",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "lodash": "4.17.15",
     "ng-packagr": "^5.4.0",
     "protractor": "~5.4.0",
-    "rxjs": "~6.4.0",
-    "ts-node": "~7.0.0",
+    "rxjs": "~6.5.3",
+    "ts-node": "~8.4.1",
     "tsickle": "^0.37.0",
     "tslib": "^1.9.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.5.3",
-    "zone.js": "~0.9.1"
+    "tslint": "~5.20.0",
+    "typescript": "~3.6.4",
+    "zone.js": "~0.10.2"
   }
 }
