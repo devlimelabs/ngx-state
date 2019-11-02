@@ -1,7 +1,6 @@
-# ngx-state
-[![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master)
+# ngx-state [![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master) [![codecov](https://codecov.io/gh/devlimelabs/ngx-state/branch/master/graph/badge.svg)](https://codecov.io/gh/devlimelabs/ngx-state)
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.7.
+Simple state management for Angular apps!
 
 ## Code scaffolding
 
