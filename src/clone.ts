@@ -1,13 +1,13 @@
 export function clone<T>(value: T): T {
-  let clone;
+  let cloned;
 
   if (Array.isArray(value)) {
-    clone = [...value];
+    cloned = [...value];
   } else if (typeof value === 'object' && value !== null) {
-    clone = { ...value };
+    cloned = { ...value };
   } else {
-    clone = value;
+    cloned = value;
   }
 
-  return clone;
+  return cloned;
 }

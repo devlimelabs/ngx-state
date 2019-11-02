@@ -49,6 +49,7 @@ export class SubscribeDirective implements OnInit, OnDestroy {
   }
 
   private unsubscribe(): void {
+    /* tslint:disable-next-line:no-unused-expression */
     this.subscription && this.subscription.unsubscribe();
   }
 }

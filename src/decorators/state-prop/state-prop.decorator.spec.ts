@@ -66,7 +66,7 @@ describe('@StateProp', () => {
       expect(state['_testPropArr']).toEqual(setArray);
       expect(state['_testPropArr']).not.toBe(setArray);
       expect(state.testPropArr).toEqual(setArray);
-      expect(state.testPropArr).not.toBe(setArray)
+      expect(state.testPropArr).not.toBe(setArray);
     });
 
     it('should set a copy of an object', () => {
@@ -82,7 +82,7 @@ describe('@StateProp', () => {
       expect(state['_testPropObj']).toEqual(setObject);
       expect(state['_testPropObj']).not.toBe(setObject);
       expect(state.testPropObj).toEqual(setObject);
-      expect(state.testPropObj).not.toBe(setObject)
+      expect(state.testPropObj).not.toBe(setObject);
     });
   });
 });
