@@ -1,4 +1,4 @@
-import { clone } from 'lodash';
+import { clone } from '../../clone';
 import { ReplaySubject } from 'rxjs';
 
 export function StateReplay<T, P>(replayLength = 1) {
@@ -16,7 +16,7 @@ export function StateReplay<T, P>(replayLength = 1) {
     });
 
     Object.defineProperty(target, key, {
-      set: (value: P): void => target[replaySubjectKey].next(clone(value))
+      set: (value: P): void => target[replaySubjectKey].next(clone<P>(value))
     });
   };
 }

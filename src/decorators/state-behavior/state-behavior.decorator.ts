@@ -1,4 +1,4 @@
-import { clone } from 'lodash';
+import { clone } from '../../clone';
 import { BehaviorSubject } from 'rxjs';
 
 export function StateBehavior<T, P>(initialValue: P = null) {
@@ -16,7 +16,7 @@ export function StateBehavior<T, P>(initialValue: P = null) {
     });
 
     Object.defineProperty(target, key, {
-        set: (value: P): void => target[behaviorSubjectKey].next(clone(value))
+        set: (value: P): void => target[behaviorSubjectKey].next(clone<P>(value))
     });
   };
 }

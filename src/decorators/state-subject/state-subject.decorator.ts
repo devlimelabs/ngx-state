@@ -1,5 +1,5 @@
-import { clone } from 'lodash';
 import { Subject } from 'rxjs';
+import { clone } from '../../clone';
 
 export function StateSubject<T, P>() {
   return function(target: T, key: string) {
@@ -16,7 +16,7 @@ export function StateSubject<T, P>() {
     });
 
     Object.defineProperty(target, key, {
-      set: (value: P): void => target[subjectKey].next(clone(value))
+      set: (value: P): void => target[subjectKey].next(clone<P>(value))
     });
   };
 }

@@ -1,40 +1,10 @@
-import { async } from '@angular/core/testing';
-import { Observable } from 'rxjs';
-import { skip, take } from 'rxjs/operators';
-
-import { State } from '../../state';
-
+import { Observable, BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { TestState } from '../../test/test.state';
 import { StateBehavior } from './state-behavior.decorator';
-
-const initialValue = 'someInitValue';
-
-interface TestStateProps {
-  test: string;
-}
-
-class TestState1 extends State<TestStateProps> {
-  @StateBehavior<TestState1, string>()
-    test: string;
-    test$: Observable<string>;
-
-    constructor() {
-      super();
-    }
-}
-
-class TestState extends State<TestStateProps> {
-  @StateBehavior<TestState, string>(initialValue)
-    test: string;
-    test$: Observable<string>;
-
-    constructor() {
-      super();
-    }
-}
 
 describe('@StateBehavior', () => {
   let state: TestState;
-  let expectedValue: string;
 
   beforeEach(() => {
     state = new TestState();
@@ -42,60 +12,138 @@ describe('@StateBehavior', () => {
 
   afterEach(() => {
     state = null;
-    expectedValue = null;
   });
 
-  it('should create the public property and default to inital value of null', async(() => {
-    state = new TestState1();
-    state.test$
-      .pipe(take(1))
-      .subscribe((newValue) => {
-        expect(newValue).toBeNull();
-      });
-  }));
+  describe('no initial value', () => {
+    beforeEach(() => {
+      StateBehavior()(state, 'testBehavior');
+    });
 
-  it('should create the public property with initialValue when provided', async(() => {
-    state.test$
-      .pipe(take(1))
-      .subscribe((newValue) => {
-        expect(newValue).toEqual(initialValue);
-      });
-  }));
+    it('should create the public, private, and observable properties', done => {
+      expect(state['_testBehavior'] instanceof BehaviorSubject).toBeTruthy();
+      expect(state.testBehavior$ instanceof Observable).toBeTruthy();
 
-  it('should create an observable version of the value', async(() => {
-    expect(state.test$ instanceof Observable).toBeTruthy();
-    state.test$
-      .pipe(take(1))
-      .subscribe(value => expect(value).toEqual(initialValue));
-  }));
+      state.testBehavior$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual(null);
+          done();
+        });
+    });
 
-  it('should allow synchronous set', async(() => {
-    expectedValue = 'set synchronously';
+    it('should emit value set with setter', done => {
+      state['testBehavior'] = 'new value';
 
-    state.test$
-      .pipe(
-        skip(1),
-        take(1)
-      )
-      .subscribe(newValue => {
-        expect(newValue).toEqual(expectedValue);
-      });
+      state.testBehavior$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual('new value');
+          done();
+        });
+    });
+  });
 
-    state.test = expectedValue;
-  }));
+  describe('initial value', () => {
+    beforeEach(() => {
+      StateBehavior('initial value')(state, 'testBehavior');
+    });
 
-  it('should emit from the behavior subject on set', async(() => {
-    expectedValue = 'a new value';
+    it('should create the public, private, and observable properties', done => {
+      expect(state['_testBehavior'] instanceof BehaviorSubject).toBeTruthy();
+      expect(state.testBehavior$ instanceof Observable).toBeTruthy();
 
-    state.test$
-      .pipe(
-        skip(1),
-        take(1)
-      )
-      .subscribe(testValue => {
-        expect(testValue).toEqual(expectedValue);
-      });
+      state.testBehavior$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual('initial value');
+          done();
+        });
+    });
 
-    state.set('test', expectedValue);
-  }));
+    it('should emit value set with setter', done => {
+      state.set('testBehavior', 'new value');
+
+      state.testBehavior$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual('new value');
+          done();
+        });
+    });
+  });
+
+  describe('immutability', () => {
+    beforeEach(() => {
+      StateBehavior([])(state, 'testBehaviorArr');
+      StateBehavior({})(state, 'testBehaviorObj');
+    });
+
+    it('should set a copy of an array', done => {
+      const setArray = [1, 2, 3];
+
+      state.set('testBehaviorArr', setArray);
+
+      expect(state['_testBehaviorArr'].value).not.toBe(setArray);
+      expect(state['_testBehaviorArr'].value).toEqual(setArray);
+
+      state.testBehaviorArr$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual(setArray);
+          expect(value).not.toBe(setArray);
+          done();
+        });
+    });
+
+    it('should get a copy of an array', done => {
+      const setArray = [1, 2, 3];
+
+      state.set('testBehaviorArr', setArray);
+
+      expect(state['_testBehaviorArr'].value).not.toBe(setArray);
+      expect(state['_testBehaviorArr'].value).toEqual(setArray);
+
+      state.testBehaviorArr$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual(setArray);
+          expect(value).not.toBe(setArray);
+          done();
+        });
+    });
+
+    it('should set a copy of an object', done => {
+      const setObject = { one: 1, two: 2, three: 3 };
+
+      state.set('testBehaviorObj', setObject);
+
+      expect(state['_testBehaviorObj'].value).not.toBe(setObject);
+      expect(state['_testBehaviorObj'].value).toEqual(setObject);
+
+      state.testBehaviorObj$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).not.toBe(setObject);
+          expect(value).toEqual(setObject);
+          done();
+        });
+    });
+
+    it('should get a copy of an object', done => {
+      const setObject = { one: 1, two: 2, three: 3 };
+
+      state.set('testBehaviorObj', setObject);
+
+      expect(state['_testBehaviorObj'].value).not.toBe(setObject);
+      expect(state['_testBehaviorObj'].value).toEqual(setObject);
+
+      state.testBehaviorObj$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).not.toBe(setObject);
+          expect(value).toEqual(setObject);
+          done();
+        });
+    });
+  });
 });

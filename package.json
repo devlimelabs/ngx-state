@@ -11,14 +11,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "dependencies": {
-    "@wishtack/rx-scavenger": "^2.0.0"
-  },
   "peerDependencies": {
     "@angular/common": "^8.2.7",
     "@angular/core": "^8.2.7",
     "core-js": "^3.0.0",
-    "lodash": "4.17.15",
     "rxjs": "~6.4.0"
   },
   "devDependencies": {
@@ -44,7 +40,6 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "lodash": "4.17.15",
     "ng-packagr": "^5.4.0",
     "protractor": "~5.4.0",
     "rxjs": "~6.4.0",

@@ -19,12 +19,7 @@
       "dom"
     ],
     "paths": {
-      "@devlime/ngx-state": [
-        "dist/ngx-state"
-      ],
-      "@devlime/ngx-state/*": [
-        "dist/ngx-state/*"
-      ]
+      "clone": ["src/clone"]
     }
   },
   "angularCompilerOptions": {

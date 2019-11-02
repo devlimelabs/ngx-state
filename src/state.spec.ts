@@ -1,6 +1,4 @@
-import { StateProp } from './decorators/state-prop/state-prop.decorator';
 import { State } from './state';
-import { TestBed } from '@angular/core/testing';
 
 interface StateProps {
   bool: boolean;
@@ -10,34 +8,24 @@ interface StateProps {
 }
 
 class TestState extends State<StateProps> {
-  @StateProp<TestState, boolean>()
-    bool: boolean;
-  @StateProp<TestState, number>()
-    num: number;
-  @StateProp<TestState, object>()
-    obj: object;
-  @StateProp<TestState, string>()
-    str: string;
+  bool: boolean;
+  num: number;
+  obj: object;
+  str: string;
 }
 
 describe('State', () => {
   let state: TestState;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        TestState
-      ]
-    });
-
-    state = TestBed.get(TestState);
+    state = new TestState();
   });
 
   it('should create an instance', () => {
     expect(state).toBeTruthy();
   });
 
-  it('should get & set properties', () => {
+  it('should set properties', () => {
     const expectedBool = false;
     const expectedNum = 8;
     const expectedObj = { key: 'value', otherNum: 5 };

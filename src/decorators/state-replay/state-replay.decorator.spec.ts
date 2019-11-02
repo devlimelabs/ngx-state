@@ -1,38 +1,10 @@
-import { async } from '@angular/core/testing';
-import { Observable } from 'rxjs';
-import { skip, take } from 'rxjs/operators';
-
-import { State } from '../../state';
-
+import { Observable, ReplaySubject } from 'rxjs';
+import { take, finalize } from 'rxjs/operators';
+import { TestState } from '../../test/test.state';
 import { StateReplay } from './state-replay.decorator';
-
-interface TestStateProps {
-  test: string;
-}
-
-class TestState1 extends State<TestStateProps> {
-  @StateReplay<TestState, string>(3)
-    test: string;
-    test$: Observable<string>;
-
-    constructor() {
-      super();
-    }
-}
-
-class TestState extends State<TestStateProps> {
-  @StateReplay<TestState, string>()
-  test: string;
-  test$: Observable<string>;
-
-  constructor() {
-    super();
-  }
-}
 
 describe('@StateReplay', () => {
   let state: TestState;
-  let expectedValue: string;
 
   beforeEach(() => {
     state = new TestState();
@@ -40,53 +12,136 @@ describe('@StateReplay', () => {
 
   afterEach(() => {
     state = null;
-    expectedValue = null;
   });
 
-  it('should create an observable version of the value', async(() => {
-    expect(state.test$ instanceof Observable).toBeTruthy();
-  }));
+  describe('no initial value', () => {
+    beforeEach(() => {
+      StateReplay()(state, 'testReplay');
+    });
 
-  it('apply replay length to ReplaySubject', async(() => {
-    state = new TestState1();
-    expectedValue = 'value 2';
+    it('should create the public, private, and observable properties', () => {
+      expect(state['_testReplay'] instanceof ReplaySubject).toBeTruthy();
+      expect(state.testReplay$ instanceof Observable).toBeTruthy();
+    });
 
-    state.test = 'value 1';
-    state.test = 'value 2';
-    state.test = 'value 3';
-    state.test = 'value 4';
+    it('should emit value set with setter', done => {
+      state.set('testReplay', 'new value');
 
-    state.test$
-      .pipe(take(1))
-      .subscribe(value => {
-        expect(value).toEqual(expectedValue);
-      });
-  }));
+      state.testReplay$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual('new value');
+          done();
+        });
+    });
+  });
 
-  it('should allow synchronous set', async(() => {
-    expectedValue = 'set synchronously';
+  describe('replay length', () => {
+    beforeEach(() => {
+      StateReplay(3)(state, 'testReplay');
+    });
 
-    state.test$
-      .pipe(take(1))
-      .subscribe(newValue => {
-        expect(newValue).toEqual(expectedValue);
-      });
+    it('should create the public, private, and observable properties', () => {
+      expect(state['_testReplay'] instanceof ReplaySubject).toBeTruthy();
+      expect(state['_testReplay']['_bufferSize']).toEqual(3);
+      expect(state.testReplay$ instanceof Observable).toBeTruthy();
+    });
 
-    state.test = expectedValue;
-  }));
+    it('should replay length provided to decorator', done => {
+      const checkValueSpy = jasmine.createSpy('checkValue', value => {});
 
-  it('should emit from the replay subject on set', async(() => {
-    expectedValue = 'a new value';
+      state.set('testReplay', 'value 1');
+      state.set('testReplay', 'value 2');
+      state.set('testReplay', 'value 3');
+      state.set('testReplay', 'value 4');
 
-    state.test$
-      .pipe(
-        skip(1),
-        take(1)
-      )
-      .subscribe(testValue => {
-        expect(testValue).toEqual(expectedValue);
-      });
+      state.testReplay$
+        .pipe(
+          take(3),
+          finalize(() => {
+            expect(checkValueSpy).toHaveBeenCalledWith('value 2');
+            expect(checkValueSpy).toHaveBeenCalledWith('value 3');
+            expect(checkValueSpy).toHaveBeenCalledWith('value 4');
+            expect(checkValueSpy).toHaveBeenCalledTimes(3);
 
-    state.set('test', expectedValue);
-  }));
+            done();
+          })
+        )
+        .subscribe(checkValueSpy);
+    });
+
+    it('should emit value set with setter', done => {
+      state.set('testReplay', 'new value');
+
+      state.testReplay$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual('new value');
+          done();
+        });
+    });
+  });
+
+  describe('immutability', () => {
+    beforeEach(() => {
+      StateReplay()(state, 'testReplayArr');
+      StateReplay()(state, 'testReplayObj');
+    });
+
+    it('should set a copy of an array', done => {
+      const setArray = [1, 2, 3];
+
+      state.set('testReplayArr', setArray);
+
+      state.testReplayArr$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual(setArray);
+          expect(value).not.toBe(setArray);
+          done();
+        });
+    });
+
+    it('should get a copy of an array', done => {
+      const setArray = [1, 2, 3];
+
+      state.set('testReplayArr', setArray);
+
+      state.testReplayArr$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).toEqual(setArray);
+          expect(value).not.toBe(setArray);
+          done();
+        });
+    });
+
+    it('should set a copy of an object', done => {
+      const setObject = { one: 1, two: 2, three: 3 };
+
+      state.set('testReplayObj', setObject);
+
+      state.testReplayObj$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).not.toBe(setObject);
+          expect(value).toEqual(setObject);
+          done();
+        });
+    });
+
+    it('should get a copy of an object', done => {
+      const setObject = { one: 1, two: 2, three: 3 };
+
+      state.set('testReplayObj', setObject);
+
+      state.testReplayObj$
+        .pipe(take(1))
+        .subscribe(value => {
+          expect(value).not.toBe(setObject);
+          expect(value).toEqual(setObject);
+          done();
+        });
+    });
+  });
 });

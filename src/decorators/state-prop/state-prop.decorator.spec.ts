@@ -1,33 +1,11 @@
-import { State } from '../../state';
+import { async } from '@angular/core/testing';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { TestState } from '../../test/test.state';
 import { StateProp } from './state-prop.decorator';
-
-const initialValue = 'someInitValue';
-
-interface TestStateProps {
-  test: string;
-}
-
-class TestState1 extends State<TestStateProps> {
-  @StateProp<TestState1, string>()
-  test: string;
-
-  constructor() {
-    super();
-  }
-}
-
-class TestState extends State<TestStateProps> {
-  @StateProp<TestState, string>(initialValue)
-  test: string;
-
-  constructor() {
-    super();
-  }
-}
 
 describe('@StateProp', () => {
   let state: TestState;
-  let expectedValue: string;
 
   beforeEach(() => {
     state = new TestState();
@@ -35,33 +13,76 @@ describe('@StateProp', () => {
 
   afterEach(() => {
     state = null;
-    expectedValue = null;
   });
 
-  it('should create the public property and default to undefined', () => {
-    state = new TestState1();
-    expect(state.test).toEqual(undefined);
+  describe('no initial value', () => {
+    beforeEach(() => {
+      StateProp()(state, 'testProp');
+    });
+
+    it('should create the public and private properties', () => {
+      expect(state['_testProp']).toEqual(null);
+      expect(state.testProp).toEqual(null);
+    });
+
+    it('should set value set with setter', () => {
+      state.testProp = 'new value';
+      expect(state.testProp).toEqual('new value');
+    });
   });
 
-  it('should create the public property with initialValue when provided', () => {
-    expect(state.test).toEqual(initialValue);
+  describe('initial value', () => {
+    beforeEach(() => {
+      StateProp('initial value')(state, 'testProp');
+    });
+
+    it('should create the public and private properties', () => {
+      expect(state['_testProp']).toEqual('initial value');
+      expect(state.testProp).toEqual('initial value');
+    });
+
+    it('should set value set with setter', () => {
+      state.testProp = 'new value';
+      expect(state.testProp).toEqual('new value');
+    });
   });
 
-  it('should set via setter', () => {
-    expectedValue = 'set synchronously';
+  describe('immutability', () => {
+    beforeEach(() => {
+      StateProp()(state, 'testPropArr');
+      StateProp()(state, 'testPropObj');
+    });
 
-    expect(state.test).toEqual(initialValue);
+    it('should set a copy of an array', () => {
+      const setArray = [ 1, 2, 3 ];
+      state.testPropArr = setArray;
+      expect(state['_testPropArr']).toEqual(setArray);
+      expect(state['_testPropArr']).not.toBe(setArray);
+    });
 
-    state.test = expectedValue;
+    it('should get a copy of an array', () => {
+      const setArray = [1, 2, 3];
+      state.testPropArr = setArray;
+      expect(state['_testPropArr']).toEqual(setArray);
+      expect(state['_testPropArr']).not.toBe(setArray);
+      expect(state.testPropArr).toEqual(setArray);
+      expect(state.testPropArr).not.toBe(setArray)
+    });
 
-    expect(state.test).toEqual(expectedValue);
-  });
+    it('should set a copy of an object', () => {
+      const setObject = { one: 1, two: 2, three: 3 };
+      state.testPropObj = setObject;
+      expect(state['_testPropObj']).toEqual(setObject);
+      expect(state['_testPropObj']).not.toBe(setObject);
+    });
 
-  it('should set from state set method', () => {
-    expectedValue = 'a new value';
-
-    state.set('test', expectedValue);
-
-    expect(state.test).toEqual(expectedValue);
+    it('should get a copy of an object', () => {
+      const setObject = { one: 1, two: 2, three: 3 };
+      state.testPropObj = setObject;
+      expect(state['_testPropObj']).toEqual(setObject);
+      expect(state['_testPropObj']).not.toBe(setObject);
+      expect(state.testPropObj).toEqual(setObject);
+      expect(state.testPropObj).not.toBe(setObject)
+    });
   });
 });

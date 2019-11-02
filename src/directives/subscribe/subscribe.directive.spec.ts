@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StateReplay } from '../../decorators/state-replay/state-replay.decorator';
 import { State } from '../../state';
 import { SubscribeDirective } from './subscribe.directive';
@@ -23,19 +23,19 @@ export interface TestStateProps {
 
 export class TestState extends State<TestStateProps> {
   @StateReplay<TestState, string>()
-    testString: string;
+    private testString: string;
     readonly testString$: Observable<string>;
 
   @StateReplay<TestState, number>()
-    testNum: number;
+    private testNum: number;
     readonly testNum$: Observable<number>;
 
   @StateReplay<TestState, object>()
-    testObj: object;
+    private testObj: object;
     readonly testObj$: Observable<object>;
 
   @StateReplay<TestState, []>()
-    testArr: any[];
+    private testArr: any[];
     readonly testArr$: Observable<any[]>;
 
   constructor() {

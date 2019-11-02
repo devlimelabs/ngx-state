@@ -1,7 +1,10 @@
+/**
+ * Directive inspired by Netanel Basel's "DIY Sibscription Handling Directive" Medium article:
+ * https://netbasal.com/diy-subscription-handling-directive-in-angular-c8f6e762697f
+ */
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Scavenger } from '@wishtack/rx-scavenger';
-import { clone } from 'lodash';
-import { Observable } from 'rxjs';
+import { clone } from '../../clone';
+import { Observable, Subscription } from 'rxjs';
 
 export class SubscribeContext {
   $implicit: any = null;
@@ -15,20 +18,19 @@ export class SubscribeContext {
 export class SubscribeDirective implements OnInit, OnDestroy {
   private observable: Observable<any>;
   private context: SubscribeContext = new SubscribeContext();
-  private scvngr = new Scavenger(this);
+  private subscription: Subscription;
 
   @Input()
   set subscribe(inputObs: Observable<any>) {
     if (this.observable !== inputObs) {
       this.observable = inputObs;
 
-      this.observable
-        .pipe(
-          this.scvngr.collectByKey('subscribe')
-        ).subscribe((value) => {
-          this.context.subscribe = clone(value);
-          this.cdr.markForCheck();
-        });
+      this.unsubscribe();
+
+      this.subscription = this.observable.subscribe((value) => {
+        this.context.subscribe = clone(value);
+        this.cdr.markForCheck();
+      });
     }
   }
 
@@ -42,5 +44,11 @@ export class SubscribeDirective implements OnInit, OnDestroy {
     this.container.createEmbeddedView(this.template, this.context);
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.unsubscribe();
+  }
+
+  private unsubscribe(): void {
+    this.subscription && this.subscription.unsubscribe();
+  }
 }
