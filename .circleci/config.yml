@@ -47,5 +47,5 @@ jobs:
 
       # RUN BUILD
       - run:
-          name: Build Angular App
-          command: yarn build:prod --progress=false
+          name: Build Library
+          command: yarn build
