@@ -1,18 +1,17 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+executors:
+  ng-executor:
     docker:
       - image: angular/ngcontainer
-
     working_directory: ~/ngx-state
 
+jobs:
+  build:
+    executor: ng-executor
     steps:
       # CHECKOUT CODE
       - checkout
-
-      # DOWNLOAD AND CACHE DEPENDENCIES
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
 
       # INSTALL GLOBAL DEPENDENCIES
       - run:
@@ -23,12 +22,6 @@ jobs:
       - run:
           name: Install App Dependencies
           command: yarn install
-
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - ./node_modules
 
       # RUN LINTING
       - run:
@@ -40,41 +33,23 @@ jobs:
           name: Build Library
           command: yarn build
 
-  test:
-    docker:
-      - image: angular/ngcontainer
-
-    working_directory: ~/ngx-state
-
-    steps:
-      # CHECKOUT CODE
-      - checkout
-
-      # DOWNLOAD AND CACHE DEPENDENCIES
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-
-      # INSTALL GLOBAL DEPENDENCIES
-      - run:
-          name: Install Global Dependencies
-          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3
-
-      # INSTALL APP DEPENDENCIES
-      - run:
-          name: Install App Dependencies
-          command: yarn install
-
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: ~/
           paths:
-            - ~/.cache/yarn
-            - ./node_modules
-    # # RUN TESTS
+            - ngx-state
+
+  test:
+    executor: ng-executor
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      # RUN TESTS
       - run:
           name: Angular Unit Tests  && Codecov Coverage
           command: xvfb-run -a yarn test:ci
 
-      # # REPORT TEST COVERAGE
+      # REPORT TEST COVERAGE
       - run:
           name: Report to Codecov
           command: bash <(curl -s https://codecov.io/bash)
