@@ -1,24 +1,35 @@
-# ngx-state [![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master) [![codecov](https://codecov.io/gh/devlimelabs/ngx-state/branch/master/graph/badge.svg)](https://codecov.io/gh/devlimelabs/ngx-state) [![Greenkeeper badge](https://badges.greenkeeper.io/devlimelabs/ngx-state.svg)](https://greenkeeper.io/)
+# @devlime/ngx-state [![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master) [![codecov](https://codecov.io/gh/devlimelabs/ngx-state/branch/master/graph/badge.svg)](https://codecov.io/gh/devlimelabs/ngx-state) [![Greenkeeper badge](https://badges.greenkeeper.io/devlimelabs/ngx-state.svg)](https://greenkeeper.io/)
 
-Simple state management for Angular apps!
+## WTF is @devlime/ngx-state??
+*F*#% another Angular state management framework?!?!?!?*
+**HELL NO!**
+@devlime/ngx-state was create to simplify state management in Angular applications. We do not consider it a "Framework" but rather a bag of utilities to help make the world a better place by making performant state management **EASY** in Angular without the need to learn YET ANOTHER FRAMEWORK or REDUX! @devlime/ngx-state provides a **VERY SIMPLE** type-safe state class to extend from, a handful of decorators to make help make your life more enjoyable and keep states CLEAN & READABLE, and a `*subscribe` directive so you aren't `*ngIf`ing your life away
 
-## Code scaffolding
+## Contents
+- Demo - Coming Soon!
+- [Setup](#setup)
+- [Usage](#usage)
+- [schematics](#schematics)
+- [inspiration](#inspiration)
+- [License](#license)
 
-Run `ng generate component component-name --project ngx-state` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-state`.
-> Note: Don't forget to add `--project ngx-state` or else it will be added to the default project in your `angular.json` file. 
+## Setup
+`yarn add @devlime/ngx-state` *if you wanna be hip*
+or
+`npm install @devlime/ngx-state` *if your neck has a beard*
 
-## Build
+## Usage
+Bear with us... We promise next time you check this it will be filled in
 
-Run `ng build ngx-state` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Schematics
+Angular schematics for @devlime/ngx-state are already underway! Update coming soon!
 
-## Publishing
+## Inspiration
+Project inspired by Angular and how awesome it is when used properly (with great power comes great responsibility)
 
-After building your library with `ng build ngx-state`, go to the dist folder `cd dist/ngx-state` and run `npm publish`.
+## Contact
+Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!templates
 
-## Running unit tests
-
-Run `ng test ngx-state` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## License
+@devlime/ngx-state is released under the
+[MIT license](https://opensource.org/licenses/MIT) for you to enjoy, abuse, or fall in love and have 3 kids with. This is our gift to you and what you do with it is your call!
