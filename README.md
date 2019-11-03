@@ -30,7 +30,7 @@ Angular schematics for @devlime/ngx-state are already underway! Update coming so
 Project inspired by Angular and how awesome it is when used properly (with great power comes great responsibility)
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!templates
+Created by [John Pribesh](mailto:john@devlimelabs.com) for @devlime (Devlime Labs) 
 
 ## License
 @devlime/ngx-state is released under the
