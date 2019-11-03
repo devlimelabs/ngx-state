@@ -8,19 +8,19 @@
 - [inspiration](#inspiration)
 - [License](#license)
 
-## WTF is @devlime/ngx-state??
-*F*#% another Angular state management framework?!?!?!?*
+## What is this
+F*#% another Angular state management framework?!?!?!?
 
 **HELL NO!**
 
-@devlime/ngx-state was create to simplify state management in Angular applications. We do not consider it a "Framework" but rather a bag of utilities to help make the world a better place by making performant state management **EASY** in Angular without the need to learn YET ANOTHER FRAMEWORK or REDUX! @devlime/ngx-state provides a **VERY SIMPLE** type-safe state class to extend from, a handful of decorators to make help make your life more enjoyable and keep states CLEAN & READABLE, and a `*subscribe` directive so you aren't `*ngIf`ing your life away
+**@devlime/ngx-state** was created to simplify state management in Angular applications. We do not consider it a "Framework" but rather a bag of utilities to help make the world a better place by making performant state management **EASY** in Angular without the need to learn YET ANOTHER FRAMEWORK or REDUX! @devlime/ngx-state provides a **VERY SIMPLE** type-safe state class to extend from, a handful of decorators to make help make your life more enjoyable and keep states CLEAN & READABLE, and a `*subscribe` directive so you aren't `*ngIf`ing your life away
 
 ## Setup
 `yarn add @devlime/ngx-state` *if you wanna be hip*
 
 or
 
-`npm install @devlime/ngx-state` *if your neck has a beard*
+`npm install @devlime/ngx-state --save` *if your neck has a beard*
 
 ## Usage
 Bear with us... We promise next time you check this it will be filled in
@@ -32,7 +32,7 @@ Angular schematics for @devlime/ngx-state are already underway! Update coming so
 Project inspired by Angular and how awesome it is when used properly (with great power comes great responsibility)
 
 ## Contact
-Created by [John Pribesh](mailto:john@devlimelabs.com) for @devlime (Devlime Labs) 
+Created by [John Pribesh](mailto:john@devlimelabs.com) for Devlime Labs
 
 ## License
 @devlime/ngx-state is released under the
