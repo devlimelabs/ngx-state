@@ -15,7 +15,9 @@
 
 ## Setup
 `yarn add @devlime/ngx-state` *if you wanna be hip*
+
 or
+
 `npm install @devlime/ngx-state` *if your neck has a beard*
 
 ## Usage
