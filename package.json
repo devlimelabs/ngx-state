@@ -1,11 +1,18 @@
 {
   "name": "@devlime/ngx-state",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devlimelabs/ngx-state.git"
+  },
+  "main": "src/public_api.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "package": "yarn build && cd dist && yarn pack",
+    "release": "yarn package && yarn publish --access public",
     "test": "ng test",
     "test:ci": "ng test --code-coverage --progress=false --watch=false",
     "lint": "ng lint",

@@ -1,1 +1,1 @@
-export * from './subscribe/subscribe.directive';
+export * from './public_api';
