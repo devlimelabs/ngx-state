@@ -13,6 +13,9 @@
   <a href="http://commitizen.github.io/cz-cli/">
     <img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg">
   </a>
+  <a href="https://github.com/semantic-release/semantic-release">
+    <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
 </p>
 
 - Demo - Coming Soon!
@@ -40,7 +43,10 @@ or
 Bear with us... We promise next time you check this it will be filled in
 
 ### State
-The `State` service class is a base class to extend your state(s) from. It takes a type interface and provides a type-safe set function. That's it:
+The `State` *"service"* class is a base class to extend your state(s) from. It takes in a type interface and provides a type-safe set function. It is recommended that our States be used only to store your state data and that's it. Example:
+
+
+
 
 ## Schematics
 Angular schematics for @devlime/ngx-state are already underway! Update coming soon!
