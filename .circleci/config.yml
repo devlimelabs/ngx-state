@@ -71,6 +71,10 @@ jobs:
   release:
     executor: ng-executor
     steps:
+      - add_ssh_keys:
+          fingerprint:
+            - "7a:79:11:28:f1:58:ee:08:75:27:39:34:09:43:62:ee"
+
       - checkout
 
       - restore_cache:
