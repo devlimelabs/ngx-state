@@ -6,6 +6,9 @@ executors:
       - image: angular/ngcontainer
     working_directory: ~/ngx-state
 
+cache_key: &cache_key ngx-state-deps-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+dist_key: &dist_key ngx-state-dist-{{ .Revision }}
+
 jobs:
   build:
     executor: ng-executor
@@ -13,15 +16,23 @@ jobs:
       # CHECKOUT CODE
       - checkout
 
+      - restore_cache:
+        key: *cache_key
+
       # INSTALL GLOBAL DEPENDENCIES
       - run:
           name: Install Global Dependencies
-          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3
+          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3 semantic-release
 
       # INSTALL APP DEPENDENCIES
       - run:
           name: Install App Dependencies
           command: yarn install
+
+      - save_cache:
+          key: *cache_key
+          paths:
+            - node_modules
 
       # RUN LINTING
       - run:
@@ -33,16 +44,21 @@ jobs:
           name: Build Library
           command: yarn build
 
-      - persist_to_workspace:
-          root: ~/
+      - save_cache:
+          key: *dist_key
           paths:
-            - ngx-state
+              - dist
 
   test:
     executor: ng-executor
     steps:
-      - attach_workspace:
-          at: ~/
+      - checkout
+
+      - restore_cache:
+          key: *cache_key
+
+      - restore_cache:
+          key: *dist_key
 
       # RUN TESTS
       - run:
@@ -54,6 +70,21 @@ jobs:
           name: Report to Codecov
           command: bash <(curl -s https://codecov.io/bash)
 
+  release:
+    executor: ng-executor
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: *cache_key
+
+      - restore_cache:
+          key: *dist_key
+
+      - run:
+         name: release
+         command: yarn semantic-release || true
+
 workflows:
   version: 2
   build_and_test:
@@ -62,3 +93,9 @@ workflows:
       - test:
           requires:
             - build
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

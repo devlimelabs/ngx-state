@@ -1,6 +1,6 @@
 {
   "name": "@devlime/ngx-state",
-  "version": "0.0.4",
+  "version": "0.0.0-development",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -16,7 +16,8 @@
     "test": "ng test",
     "test:ci": "ng test --code-coverage --progress=false --watch=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "semantic-release": "semantic-release"
   },
   "peerDependencies": {
     "@angular/common": "^8.2.13",
@@ -38,6 +39,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~12.12.5",
     "codelyzer": "^5.0.0",
+    "cz-conventional-changelog": "3.0.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.4.1",
@@ -51,6 +53,15 @@
     "tsickle": "^0.37.0",
     "tslint": "~5.20.0",
     "typescript": "~3.5.3",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.10.2",
+    "semantic-release": "^15.13.30"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "pkgRoot": "./dist"
   }
 }

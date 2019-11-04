@@ -1,4 +1,19 @@
-# @devlime/ngx-state [![CircleCI](https://circleci.com/gh/devlimelabs/ngx-state/tree/master.svg?style=svg&circle-token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7)](https://circleci.com/gh/devlimelabs/ngx-state/tree/master) [![codecov](https://codecov.io/gh/devlimelabs/ngx-state/branch/master/graph/badge.svg)](https://codecov.io/gh/devlimelabs/ngx-state) [![Greenkeeper badge](https://badges.greenkeeper.io/devlimelabs/ngx-state.svg)](https://greenkeeper.io/)
+<h1 align="center">@devlime/ngx-state</h1>
+
+<p align="center">
+  <a href="https://circleci.com/gh/devlimelabs/ngx-state/tree/master">
+    <img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/devlimelabs/ngx-state/master?style=for-the-badge&token=08611d93f1898392311a4fc6b6fe87f48eaa5ad7">
+  </a>
+  <a href="https://codecov.io/gh/devlimelabs/ngx-state">
+    <img alt="Codecov branch" src="https://img.shields.io/codecov/c/gh/devlimelabs/ngx-state/master?style=for-the-badge">
+  </a>
+  <a href="https://greenkeeper.io/">
+    <img alt="Greenkeeper badge" src="https://badges.greenkeeper.io/devlimelabs/ngx-state.svg">
+  </a>
+  <a href="http://commitizen.github.io/cz-cli/">
+    <img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg">
+  </a>
+</p>
 
 - Demo - Coming Soon!
 - [Setup](#setup)
@@ -23,6 +38,9 @@ or
 
 ## Usage
 Bear with us... We promise next time you check this it will be filled in
+
+### State
+The `State` service class is a base class to extend your state(s) from. It takes a type interface and provides a type-safe set function. That's it:
 
 ## Schematics
 Angular schematics for @devlime/ngx-state are already underway! Update coming soon!
