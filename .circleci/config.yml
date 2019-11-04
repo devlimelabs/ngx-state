@@ -6,9 +6,6 @@ executors:
       - image: angular/ngcontainer
     working_directory: ~/ngx-state
 
-cache_key: &cache_key ngx-state-deps-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
-dist_key: &dist_key ngx-state-dist-{{ .Revision }}
-
 jobs:
   build:
     executor: ng-executor
@@ -17,12 +14,12 @@ jobs:
       - checkout
 
       - restore_cache:
-        key: *cache_key
+          key: deps-cache-{{ checksum "yarn.lock" }}
 
       # INSTALL GLOBAL DEPENDENCIES
       - run:
           name: Install Global Dependencies
-          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3 semantic-release
+          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3 semantic-release @angular/cli
 
       # INSTALL APP DEPENDENCIES
       - run:
@@ -30,9 +27,10 @@ jobs:
           command: yarn install
 
       - save_cache:
-          key: *cache_key
+          key: deps-cache-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
+            - ~/.cache/yarn
+            - ./node_modules
 
       # RUN LINTING
       - run:
@@ -45,7 +43,7 @@ jobs:
           command: yarn build
 
       - save_cache:
-          key: *dist_key
+          key: dist-{{ .Revision }}
           paths:
               - dist
 
@@ -55,10 +53,10 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: *cache_key
+          key: deps-cache-{{ checksum "yarn.lock" }}
 
       - restore_cache:
-          key: *dist_key
+          key: dist-{{ .Revision }}
 
       # RUN TESTS
       - run:
@@ -76,10 +74,10 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: *cache_key
+          key: deps-cache-{{ checksum "yarn.lock" }}
 
       - restore_cache:
-          key: *dist_key
+          key: dist-{{ .Revision }}
 
       - run:
          name: release
