@@ -51,12 +51,12 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "ng-packagr": "^5.4.0",
     "protractor": "~5.4.0",
+    "semantic-release": "^15.13.30",
     "ts-node": "~8.4.1",
     "tsickle": "^0.37.0",
     "tslint": "~5.20.0",
     "typescript": "~3.5.3",
-    "zone.js": "^0.10.2",
-    "semantic-release": "^15.13.30"
+    "zone.js": "^0.10.2"
   },
   "config": {
     "commitizen": {
@@ -65,19 +65,19 @@
   },
   "release": {
     "pkgRoot": "./dist",
-     "prepare": [
-       "@semantic-release/changelog",
-       "@semantic-release/npm",
-       {
-         "path": "@semantic-release/git",
-         "assets": [
-           "package.json",
-           "yarn.lock",
-           "CHANGELOG.md"
-         ],
-         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-       }
-     ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "yarn.lock",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
