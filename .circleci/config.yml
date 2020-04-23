@@ -3,7 +3,7 @@ version: 2.1
 executors:
   ng-executor:
     docker:
-      - image: angular/ngcontainer
+      - image: angular/ngcontainer:latest
     working_directory: ~/ngx-state
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
       # INSTALL GLOBAL DEPENDENCIES
       - run:
           name: Install Global Dependencies
-          command: yarn global add codecov tslint@~5.15.0 typescript@~3.5.3 semantic-release @angular/cli
+          command: yarn global add codecov tslint@~5.20.0 typescript@~3.8.3 semantic-release @angular/cli
 
       # INSTALL APP DEPENDENCIES
       - run:
