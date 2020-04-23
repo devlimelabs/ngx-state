@@ -3,7 +3,7 @@ version: 2.1
 executors:
   ng-executor:
     docker:
-      - image: angular/ngcontainer:latest
+      - image: circleci/node:12-browsers
     working_directory: ~/ngx-state
 
 jobs:
