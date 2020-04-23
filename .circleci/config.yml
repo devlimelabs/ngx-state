@@ -58,6 +58,11 @@ jobs:
       - restore_cache:
           key: dist-{{ .Revision }}
 
+      # INSTALL GLOBAL DEPENDENCIES
+      - run:
+          name: Install Global Dependencies
+          command: yarn global add codecov tslint@~5.20.0 typescript@~3.8.3 semantic-release @angular/cli
+
       # RUN TESTS
       - run:
           name: Angular Unit Tests  && Codecov Coverage
