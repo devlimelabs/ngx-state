@@ -1,4 +1,4 @@
-import { clone } from '../../clone';
+import { clone } from 'clone';
 
 export function StateProp<T, P>(initialValue: P = null) {
   return function(target: T, key: string) {
