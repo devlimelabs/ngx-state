@@ -15,7 +15,6 @@
     "start": "ng serve",
     "build": "ng build",
     "package": "yarn build && cd dist && yarn pack",
-    "postinstall": "ngcc",
     "release": "yarn package && yarn publish --access public",
     "test": "ng test",
     "test:ci": "node ./node_modules/@angular/cli/bin/ng test --code-coverage --progress=false --watch=false",
