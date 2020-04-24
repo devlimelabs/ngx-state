@@ -68,7 +68,7 @@ describe('SubscribeDirective', () => {
       providers: [TestState]
     }).compileComponents();
 
-    state = TestBed.get(TestState);
+    state = TestBed.inject(TestState);
     state.set('testArr', initialValues.testArr);
     state.set('testNum', initialValues.testNum);
     state.set('testObj', initialValues.testObj);

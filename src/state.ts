@@ -12,6 +12,6 @@ export class State<T> {
   }
 
   constructor() {
-    this.values = {}
+    this.values = {};
   }
 }

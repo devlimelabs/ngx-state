@@ -6,7 +6,7 @@ export function StateReplay<T, P>(replayLength = 1) {
     const replaySubjectKey = Symbol();
     const observableKey = `${key}$`;
 
-    function getReplaySubject(instance): ReplaySubject<P> {
+    function getReplaySubject(instance: T): ReplaySubject<P> {
       if (!instance[replaySubjectKey]) {
         instance[replaySubjectKey] = new ReplaySubject<P>(replayLength);
       }
@@ -22,6 +22,7 @@ export function StateReplay<T, P>(replayLength = 1) {
     });
 
     return {
+      enumerable: true,
       get() {
         return clone(this.values[key]);
       },

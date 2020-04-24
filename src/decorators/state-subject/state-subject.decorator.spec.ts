@@ -1,48 +1,38 @@
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { TestState } from '../../test/test.state';
-import { StateSubject } from './state-subject.decorator';
+import { TestBed, async } from '@angular/core/testing';
 
 describe('@StateSubject', () => {
   let state: TestState;
 
   beforeEach(() => {
-    state = new TestState();
-  });
+    TestBed.configureTestingModule({
+      providers: [TestState]
+    });
 
-  afterEach(() => {
-    state = null;
+    state = TestBed.inject(TestState);
   });
 
   describe('no initial value', () => {
-    beforeEach(() => {
-      StateSubject()(state, 'testSubject');
-    });
-
     it('should create the public, private, and observable properties', () => {
-      expect(state['_testSubject'] instanceof Subject).toBeTruthy();
       expect(state.testSubject$ instanceof Observable).toBeTruthy();
     });
 
-    it('should emit value set with setter', done => {
+    it('should emit value set with setter', async(() =>  {
       state.testSubject$
         .pipe(take(1))
         .subscribe(value => {
           expect(value).toEqual('new value');
-          done();
         });
 
       state.set('testSubject', 'new value');
-    });
+      expect(state.testSubject).toEqual('new value');
+    }));
   });
 
   describe('immutability', () => {
-    beforeEach(() => {
-      StateSubject()(state, 'testSubjectArr');
-      StateSubject()(state, 'testSubjectObj');
-    });
-
-    it('should set a copy of an array', done => {
+    it('should set a copy of an array', async(() =>  {
       const setArray = [1, 2, 3];
 
       state.testSubjectArr$
@@ -50,13 +40,12 @@ describe('@StateSubject', () => {
         .subscribe(value => {
           expect(value).toEqual(setArray);
           expect(value).not.toBe(setArray);
-          done();
         });
 
       state.set('testSubjectArr', setArray);
-    });
+    }));
 
-    it('should get a copy of an array', done => {
+    it('should get a copy of an array', async(() =>  {
       const setArray = [1, 2, 3];
 
       state.testSubjectArr$
@@ -64,13 +53,12 @@ describe('@StateSubject', () => {
         .subscribe(value => {
           expect(value).toEqual(setArray);
           expect(value).not.toBe(setArray);
-          done();
         });
 
       state.set('testSubjectArr', setArray);
-    });
+    }));
 
-    it('should set a copy of an object', done => {
+    it('should set a copy of an object', async(() =>  {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.testSubjectObj$
@@ -78,13 +66,12 @@ describe('@StateSubject', () => {
         .subscribe(value => {
           expect(value).not.toBe(setObject);
           expect(value).toEqual(setObject);
-          done();
         });
 
       state.set('testSubjectObj', setObject);
-    });
+    }));
 
-    it('should get a copy of an object', done => {
+    it('should get a copy of an object', async(() =>  {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.testSubjectObj$
@@ -92,10 +79,9 @@ describe('@StateSubject', () => {
         .subscribe(value => {
           expect(value).not.toBe(setObject);
           expect(value).toEqual(setObject);
-          done();
         });
 
       state.set('testSubjectObj', setObject);
-    });
+    }));
   });
 });

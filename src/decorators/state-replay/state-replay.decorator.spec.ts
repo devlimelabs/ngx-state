@@ -16,7 +16,7 @@ describe('@StateReplay', () => {
 
   describe('no initial value', () => {
 
-    it("should create the observable property", () => {
+    it('should create the observable property', () => {
       expect(state.testReplay$ instanceof Observable).toBeTruthy();
     });
 
@@ -27,6 +27,7 @@ describe('@StateReplay', () => {
         .pipe(take(1))
         .subscribe(value => {
           expect(value).toEqual('new value');
+          expect(state.testReplay).toEqual('new value');
         });
     }));
   });
@@ -37,7 +38,7 @@ describe('@StateReplay', () => {
     });
 
     it('should replay length provided to decorator', async(() => {
-      let values = [];
+      const values = [];
 
       state.set('testReplayLength', 'value 1');
       state.set('testReplayLength', 'value 2');
@@ -118,7 +119,7 @@ describe('@StateReplay', () => {
       state.set('testReplay', 'synchronously');
 
       expect(state.get('testReplay')).toEqual('synchronously');
-      expect(state.testReplay).toEqual("synchronously");
+      expect(state.testReplay).toEqual('synchronously');
     });
   });
 });

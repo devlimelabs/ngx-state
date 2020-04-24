@@ -2,21 +2,34 @@ import { Subject } from 'rxjs';
 import { clone } from '../../clone';
 
 export function StateSubject<T, P>() {
-  return function(target: T, key: string) {
-    const subjectKey = `_${key}`;
+  return function(target: T, key: string): any {
+    const subjectKey = Symbol();
     const observableKey = `${key}$`;
 
-    Object.defineProperty(target, subjectKey, {
-      value: new Subject<P>()
-    });
+    function getSubject(instance: T): Subject<P> {
+      if (!instance[subjectKey]) {
+        instance[subjectKey] = new Subject<P>();
+      }
+
+      return instance[subjectKey];
+    }
 
     Object.defineProperty(target, observableKey, {
       enumerable: true,
-      value: target[subjectKey].asObservable()
+      get() {
+        return getSubject(this).asObservable();
+      }
     });
 
-    Object.defineProperty(target, key, {
-      set: (value: P): void => target[subjectKey].next(clone<P>(value))
-    });
+    return {
+      enumerable: true,
+      get() {
+        return clone(this.values[key]);
+      },
+      set(value: P): void {
+        this.values[key] = value;
+        getSubject(this).next(clone<P>(value));
+      },
+    };
   };
 }

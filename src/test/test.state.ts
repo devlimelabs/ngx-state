@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 
 export interface TestStateProps {
   testBehavior: string;
+  testBehaviorDefault: string;
   testBehaviorArr: any[];
   testBehaviorObj: object;
 
@@ -22,15 +23,37 @@ export interface TestStateProps {
   testSubjectObj: object;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TestState extends State<TestStateProps> {
-  testBehavior$: Observable<string>;
-  testBehaviorArr$: Observable<any[]>;
-  testBehaviorObj$: Observable<object>;
 
-  testProp: string;
-  testPropArr: any[];
-  testPropObj: any;
+  @StateBehavior<TestState, string>()
+    readonly testBehavior: string;
+    testBehavior$: Observable<string>;
+
+  @StateBehavior<TestState, string>('default')
+    testBehaviorDefault: string;
+    testBehaviorDefault$: Observable<string>;
+
+  @StateBehavior<TestState, any[]>()
+    testBehaviorArr: any[];
+    testBehaviorArr$: Observable<any[]>;
+
+  @StateBehavior<TestState, object>()
+    testBehaviorObj: object;
+    testBehaviorObj$: Observable<object>;
+
+
+  @StateProp<TestState, string>()
+    testProp: string;
+
+  @StateProp<TestState, any[]>()
+    testPropArr: any[];
+
+  @StateProp<TestState, any>()
+    testPropObj: any;
+
 
   @StateReplay<TestState, string>()
     readonly testReplay: string;
@@ -48,9 +71,19 @@ export class TestState extends State<TestStateProps> {
     readonly testReplayObj: object;
     readonly testReplayObj$: Observable<object>;
 
-  testSubject$: Observable<string>;
-  testSubjectArr$: Observable<any[]>;
-  testSubjectObj$: Observable<object>;
+
+  @StateSubject<TestState, string>()
+    readonly testSubject: string;
+    readonly testSubject$: Observable<string>;
+
+  @StateSubject<TestState, any[]>()
+    readonly testSubjectArr: any[];
+    readonly testSubjectArr$: Observable<any[]>;
+
+  @StateSubject<TestState, object>()
+    readonly testSubjectObj: object;
+    readonly testSubjectObj$: Observable<object>;
+
 
   constructor() {
     super();
