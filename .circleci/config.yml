@@ -58,15 +58,10 @@ jobs:
       - restore_cache:
           key: dist-{{ .Revision }}
 
-      # INSTALL APP DEPENDENCIES
-      - run:
-          name: Install App Dependencies
-          command: yarn install
-
       # RUN TESTS
       - run:
           name: Angular Unit Tests  && Codecov Coverage
-          command: xvfb-run -a yarn test:ci
+          command: yarn test:ci
 
       # REPORT TEST COVERAGE
       - run:
