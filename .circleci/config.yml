@@ -61,7 +61,7 @@ jobs:
       # INSTALL GLOBAL DEPENDENCIES
       - run:
           name: Install Global Dependencies
-          command: yarn global add codecov tslint@~5.20.0 typescript@~3.8.3 semantic-release @angular/cli
+          command: yarn global add codecov tslint@~5.20.0 typescript@~3.8.3 semantic-release @angular/cli @angular-devkit/build-angular
 
       # RUN TESTS
       - run:
