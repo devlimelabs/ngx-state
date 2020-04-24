@@ -1,22 +1,35 @@
-import { clone } from '../../clone';
+import { clone } from 'clone';
 import { ReplaySubject } from 'rxjs';
 
 export function StateReplay<T, P>(replayLength = 1) {
-  return function(target: T, key: string) {
-    const replaySubjectKey = `_${key}`;
+  return function(target: T, key: string): any {
+    const replaySubjectKey = Symbol();
     const observableKey = `${key}$`;
 
-    Object.defineProperty(target, replaySubjectKey, {
-      value: new ReplaySubject<P>(replayLength)
-    });
+    function getReplaySubject(instance: T): ReplaySubject<P> {
+      if (!instance[replaySubjectKey]) {
+        instance[replaySubjectKey] = new ReplaySubject<P>(replayLength);
+      }
+
+      return instance[replaySubjectKey];
+    }
 
     Object.defineProperty(target, observableKey, {
       enumerable: true,
-      value: target[replaySubjectKey].asObservable()
+      get() {
+        return getReplaySubject(this).asObservable();
+      }
     });
 
-    Object.defineProperty(target, key, {
-      set: (value: P): void => target[replaySubjectKey].next(clone<P>(value))
-    });
+    return {
+      enumerable: true,
+      get() {
+        return clone(this.values[key]);
+      },
+      set(value: P): void {
+        this.values[key] = value;
+        getReplaySubject(this).next(clone(value));
+      }
+    };
   };
 }

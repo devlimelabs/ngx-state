@@ -50,28 +50,32 @@ The `State` *"service"* class is a base class to extend your state(s) from. It t
 ### Decorators
 The decorators in @devlime/ngx-state were created to make your life easy by keeping states clean and readable. Behind the scenes the property decorators leverage `Object.defineProperty` to create both hidden private, and public properties with setters and getters that provide immutability and indirect access to your state data.
 
-#### @StateProp (it's just a variable yall)
+### @StateProp (it's just a variable)
 > ##### Type Parameters
 > T: extends State,
 > P: value type
 > ##### Parameters
 > defaultValue: P = null
+##### Description
+The @StateProp decorator is used to store a plain (non-observable) value that doesn't need to be subscribed to.
 
-#### @StateBehavior (it's just a BehaviorSubject yall)
+### @StateBehavior (it's just a BehaviorSubject)
 > ##### Type Parameters
 > T: extends State,
 > P: BehaviorSubject value type
 > ##### Parameters
 > defaultValue: P = null
+##### Description
+The @StateBehavior decorator is used to store a value as an RxJS BehaviorSubject. When creating a @StateBehavior the decorator will automagically create a second property of the same name but with a `$` suffix. The property will be used to access the BehvaiorSubject via the `asObservable` method. You should also manually add this second property to the state to maintain proper typings.
 
-#### @StateReplay (it's just a ReplaySubject yall)
+#### @StateReplay (it's just a ReplaySubject)
 > ##### Type Parameters
 > T: extends State,
 > P: ReplaySubject value type
 > ##### Parameters
 > replaylength: number = 1
 
-#### @StateSubject (it's just a Subject yall)
+#### @StateSubject (it's just a Subject)
 > ##### Type Parameters
 > T: extends State,
 > P: value type
