@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/devlimelabs/ngx-state/compare/v1.1.1...v1.1.2) (2020-04-24)
+
+
+### Bug Fixes
+
+* **ivy:** disables ivy so library will publish ([0e01c05](https://github.com/devlimelabs/ngx-state/commit/0e01c05f6dd8467aabda4cd9466aceebbaf560a4))
+
 ## [1.1.1](https://github.com/devlimelabs/ngx-state/compare/v1.1.0...v1.1.1) (2020-04-24)
 
 
