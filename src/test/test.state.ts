@@ -1,6 +1,7 @@
 import { StateBehavior, StateProp, StateReplay, StateSubject } from '../decorators';
 import { State } from '../';
 import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 export interface TestStateProps {
   testBehavior: string;
@@ -12,6 +13,7 @@ export interface TestStateProps {
   testPropObj: object;
 
   testReplay: string;
+  testReplayLength: string;
   testReplayArr: any[];
   testReplayObj: object;
 
@@ -20,6 +22,7 @@ export interface TestStateProps {
   testSubjectObj: object;
 }
 
+@Injectable()
 export class TestState extends State<TestStateProps> {
   testBehavior$: Observable<string>;
   testBehaviorArr$: Observable<any[]>;
@@ -29,9 +32,21 @@ export class TestState extends State<TestStateProps> {
   testPropArr: any[];
   testPropObj: any;
 
-  testReplay$: Observable<string>;
-  testReplayArr$: Observable<any[]>;
-  testReplayObj$: Observable<object>;
+  @StateReplay<TestState, string>()
+    readonly testReplay: string;
+    readonly testReplay$: Observable<string>;
+
+  @StateReplay<TestState, string>(3)
+    readonly testReplayLength: string;
+    readonly testReplayLength$: Observable<string>;
+
+  @StateReplay<TestState, any[]>()
+    readonly testReplayArr: any[];
+    readonly testReplayArr$: Observable<any[]>;
+
+  @StateReplay<TestState, object>()
+    readonly testReplayObj: object;
+    readonly testReplayObj$: Observable<object>;
 
   testSubject$: Observable<string>;
   testSubjectArr$: Observable<any[]>;
