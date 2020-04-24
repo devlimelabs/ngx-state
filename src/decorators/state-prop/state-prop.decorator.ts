@@ -1,18 +1,23 @@
 import { clone } from 'clone';
 
-export function StateProp<T, P>(initialValue: P = null) {
-  return function(target: T, key: string) {
-    const privateKey = `_${key}`;
+export function StateProp<T, P>(initialValue?: P) {
+  return function(target: T, key: string): any {
+    const setKey = Symbol();
 
-    Object.defineProperty(target, privateKey, {
-      writable: true,
-      value: initialValue
-    });
-
-    Object.defineProperty(target, key, {
+    return {
       enumerable: true,
-      get: (): P => clone<P>(target[privateKey]),
-      set: (value: P) => target[privateKey] = clone<P>(value)
-    });
+      get(): P {
+        if (this[setKey] === undefined && initialValue !== undefined) {
+          this[setKey] = initialValue;
+          this.values[key] = initialValue;
+        }
+
+        return clone(this[setKey]);
+      },
+      set(value: P) {
+        this.values[key] = clone(value);
+        this[setKey] = clone(value);
+      }
+    };
   };
 }

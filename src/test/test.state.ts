@@ -10,6 +10,7 @@ export interface TestStateProps {
   testBehaviorObj: object;
 
   testProp: string;
+  testPropDefault: string;
   testPropArr: any[];
   testPropObj: object;
 
@@ -28,7 +29,7 @@ export interface TestStateProps {
 })
 export class TestState extends State<TestStateProps> {
 
-  @StateBehavior<TestState, string>()
+  @StateBehavior<TestState, string>('')
     readonly testBehavior: string;
     testBehavior$: Observable<string>;
 
@@ -36,17 +37,20 @@ export class TestState extends State<TestStateProps> {
     testBehaviorDefault: string;
     testBehaviorDefault$: Observable<string>;
 
-  @StateBehavior<TestState, any[]>()
+  @StateBehavior<TestState, any[]>([])
     testBehaviorArr: any[];
     testBehaviorArr$: Observable<any[]>;
 
-  @StateBehavior<TestState, object>()
+  @StateBehavior<TestState, object>({})
     testBehaviorObj: object;
     testBehaviorObj$: Observable<object>;
 
 
   @StateProp<TestState, string>()
     testProp: string;
+
+  @StateProp<TestState, string>('default')
+    testPropDefault: string;
 
   @StateProp<TestState, any[]>()
     testPropArr: any[];

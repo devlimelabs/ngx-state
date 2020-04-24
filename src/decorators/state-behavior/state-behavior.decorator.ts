@@ -2,7 +2,7 @@ import { clone } from 'clone';
 import { BehaviorSubject } from 'rxjs';
 import { State } from '../../state';
 
-export function StateBehavior<T extends State<T>, P>(initialValue: P = null) {
+export function StateBehavior<T extends State<T>, P>(initialValue: P) {
   return function(target: T, key: string): any {
     const behaviorSubjectKey = Symbol();
     const observableKey = `${key}$`;

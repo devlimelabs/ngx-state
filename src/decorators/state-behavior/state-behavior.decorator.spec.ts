@@ -14,20 +14,6 @@ describe('@StateBehavior', () => {
     state = TestBed.inject(TestState);
   });
 
-  describe('no initial value', () => {
-    it('should create the observable and static properties', async(() => {
-      expect(state.testBehavior$ instanceof Observable).toBeTruthy();
-
-      expect(state.testBehavior).toBeNull();
-
-      state.testBehavior$
-        .pipe(take(1))
-        .subscribe(value => {
-          expect(value).toEqual(null);
-        });
-    }));
-  });
-
   describe('initial value', () => {
     it('should create the public, private, and observable properties', async(() => {
       expect(state.testBehaviorDefault$ instanceof Observable).toBeTruthy();
