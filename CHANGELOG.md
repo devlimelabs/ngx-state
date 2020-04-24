@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/devlimelabs/ngx-state/compare/v1.1.0...v1.1.1) (2020-04-24)
+
+
+### Bug Fixes
+
+* **statebehavior:** fixes initial value not being set for sync value ([3a33114](https://github.com/devlimelabs/ngx-state/commit/3a33114c8840ff5c643f0a20d4e39d8f92afa9bf))
+* **stateprop:** fixes values being set on prototype instead of instance ([7d1ed90](https://github.com/devlimelabs/ngx-state/commit/7d1ed9037fb4405ab31f5dde348557d4ab7a9d03))
+
 # [1.1.0](https://github.com/devlimelabs/ngx-state/compare/v1.0.0...v1.1.0) (2020-04-24)
 
 
