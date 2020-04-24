@@ -17,7 +17,7 @@
     "package": "yarn build && cd dist && yarn pack",
     "release": "yarn package && yarn publish --access public",
     "test": "ng test",
-    "test:ci": "ng test --code-coverage --progress=false --watch=false",
+    "test:ci": "node ./node_modules/@angular/cli/bin/ng test --code-coverage --progress=false --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "semantic-release": "semantic-release"
