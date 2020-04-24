@@ -26,6 +26,12 @@ export function StateBehavior<T extends State<T>, P>(initialValue: P = null) {
     return {
       enumerable: true,
       get() {
+        const isUndefined = this.values[key] === undefined;
+
+        if (isUndefined && initialValue !== undefined) {
+          this.values[key] = initialValue;
+        }
+
         return clone(this.values[key]);
       },
       set(value: P) {
