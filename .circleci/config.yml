@@ -89,6 +89,10 @@ jobs:
           key: dist-{{ .Revision }}
 
       - run:
+         name: Ensure semantic-release install
+         command: yarn global add semantic-release
+
+      - run:
          name: release
          command: yarn semantic-release || true
 
