@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { clone } from 'clone';
+import { clone } from '../../clone';
 
 export function StateSubject<T, P>() {
   return function(target: T, key: string): any {

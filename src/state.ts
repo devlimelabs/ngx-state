@@ -1,4 +1,4 @@
-import { clone } from 'clone';
+import { clone } from './clone';
 
 export class State<T> {
   private values: Partial<T>;

@@ -3,7 +3,7 @@
  * https://netbasal.com/diy-subscription-handling-directive-in-angular-c8f6e762697f
  */
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { clone } from 'clone';
+import { clone } from '../../clone';
 import { Observable, Subscription } from 'rxjs';
 
 export class SubscribeContext {

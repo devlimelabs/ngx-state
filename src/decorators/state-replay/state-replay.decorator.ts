@@ -1,4 +1,4 @@
-import { clone } from 'clone';
+import { clone } from '../../clone';
 import { ReplaySubject } from 'rxjs';
 
 export function StateReplay<T, P>(replayLength = 1) {
