@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/devlimelabs/ngx-state/compare/v1.1.3...v1.1.4) (2020-04-25)
+
+
+### Bug Fixes
+
+* **clone:** fixes import paths for clone function ([ecdd617](https://github.com/devlimelabs/ngx-state/commit/ecdd6175ec50f3743476d50eaba90297c05addad))
+
 ## [1.1.3](https://github.com/devlimelabs/ngx-state/compare/v1.1.2...v1.1.3) (2020-04-25)
 
 
