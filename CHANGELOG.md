@@ -1,3 +1,12 @@
+## [1.1.3](https://github.com/devlimelabs/ngx-state/compare/v1.1.2...v1.1.3) (2020-04-25)
+
+
+### Bug Fixes
+
+* **ci:** ensures semantic-release is installed ([e9529dc](https://github.com/devlimelabs/ngx-state/commit/e9529dc15ef898f4c030bfcdbbcd3dafeebe2112))
+* **ci:** installs app deps during release step :{ ([e42f77b](https://github.com/devlimelabs/ngx-state/commit/e42f77bcc4cd46a7048232a07252f1a431eae6ba))
+* **ts:** rolls ts back to 3.6 for better backwards compatibility ([6f531e5](https://github.com/devlimelabs/ngx-state/commit/6f531e58eb354465380fbb8e130c8eed93aeee88))
+
 ## [1.1.2](https://github.com/devlimelabs/ngx-state/compare/v1.1.1...v1.1.2) (2020-04-24)
 
 
