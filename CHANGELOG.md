@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/devlimelabs/ngx-state/compare/v1.1.5...v1.1.6) (2021-03-22)
+
+
+### Bug Fixes
+
+* upgrade tslib from 1.11.2 to 1.14.1 ([af60c30](https://github.com/devlimelabs/ngx-state/commit/af60c30185a471b57f99dd82da26457c35dd74b8))
+
 ## [1.1.5](https://github.com/devlimelabs/ngx-state/compare/v1.1.4...v1.1.5) (2020-11-22)
 
 
