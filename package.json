@@ -23,7 +23,7 @@
     "semantic-release": "semantic-release"
   },
   "peerDependencies": {
-    "rxjs": "~6.5.5"
+    "rxjs": "~6.6.6"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.5",
