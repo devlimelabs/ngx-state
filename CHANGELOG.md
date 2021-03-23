@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/devlimelabs/ngx-state/compare/v1.1.6...v2.0.0) (2021-03-23)
+
+
+### Features
+
+* **angular version:** upgrades all deps and moves to angular 11 ([79dd670](https://github.com/devlimelabs/ngx-state/commit/79dd67017000d6089c32d5637adba42068d4730c))
+
+
+### BREAKING CHANGES
+
+* **angular version:** upgrades all deps and moves to angular 11
+
 ## [1.1.6](https://github.com/devlimelabs/ngx-state/compare/v1.1.5...v1.1.6) (2021-03-22)
 
 
