@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { TestState } from '../../test/test.state';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('@StateSubject', () => {
   let state: TestState;
@@ -19,7 +19,7 @@ describe('@StateSubject', () => {
       expect(state.testSubject$ instanceof Observable).toBeTruthy();
     });
 
-    it('should emit value set with setter', async(() =>  {
+    it('should emit value set with setter', waitForAsync(() =>  {
       state.testSubject$
         .pipe(take(1))
         .subscribe(value => {
@@ -32,7 +32,7 @@ describe('@StateSubject', () => {
   });
 
   describe('immutability', () => {
-    it('should set a copy of an array', async(() =>  {
+    it('should set a copy of an array', waitForAsync(() =>  {
       const setArray = [1, 2, 3];
 
       state.testSubjectArr$
@@ -45,7 +45,7 @@ describe('@StateSubject', () => {
       state.set('testSubjectArr', setArray);
     }));
 
-    it('should get a copy of an array', async(() =>  {
+    it('should get a copy of an array', waitForAsync(() =>  {
       const setArray = [1, 2, 3];
 
       state.testSubjectArr$
@@ -58,7 +58,7 @@ describe('@StateSubject', () => {
       state.set('testSubjectArr', setArray);
     }));
 
-    it('should set a copy of an object', async(() =>  {
+    it('should set a copy of an object', waitForAsync(() =>  {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.testSubjectObj$
@@ -71,7 +71,7 @@ describe('@StateSubject', () => {
       state.set('testSubjectObj', setObject);
     }));
 
-    it('should get a copy of an object', async(() =>  {
+    it('should get a copy of an object', waitForAsync(() =>  {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.testSubjectObj$

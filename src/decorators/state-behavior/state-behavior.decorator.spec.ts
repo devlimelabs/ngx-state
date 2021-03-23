@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { TestState } from '../../test/test.state';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('@StateBehavior', () => {
   let state: TestState;
@@ -15,7 +15,7 @@ describe('@StateBehavior', () => {
   });
 
   describe('initial value', () => {
-    it('should create the public, private, and observable properties', async(() => {
+    it('should create the public, private, and observable properties', waitForAsync(() => {
       expect(state.testBehaviorDefault$ instanceof Observable).toBeTruthy();
 
       expect(state.testBehaviorDefault).toEqual('default');
@@ -27,7 +27,7 @@ describe('@StateBehavior', () => {
         });
     }));
 
-    it('should emit value set with setter', async(() => {
+    it('should emit value set with setter', waitForAsync(() => {
       state.set('testBehavior', 'new value');
       expect(state.testBehavior).toEqual('new value');
 
@@ -40,7 +40,7 @@ describe('@StateBehavior', () => {
   });
 
   describe('immutability', () => {
-    it('should set a copy of an array', async(() => {
+    it('should set a copy of an array', waitForAsync(() => {
       const setArray = [1, 2, 3];
 
       state.set('testBehaviorArr', setArray);
@@ -53,7 +53,7 @@ describe('@StateBehavior', () => {
         });
     }));
 
-    it('should get a copy of an array', async(() => {
+    it('should get a copy of an array', waitForAsync(() => {
       const setArray = [1, 2, 3];
 
       state.set('testBehaviorArr', setArray);
@@ -66,7 +66,7 @@ describe('@StateBehavior', () => {
         });
     }));
 
-    it('should set a copy of an object', async(() => {
+    it('should set a copy of an object', waitForAsync(() => {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.set('testBehaviorObj', setObject);
@@ -79,7 +79,7 @@ describe('@StateBehavior', () => {
         });
     }));
 
-    it('should get a copy of an object', async(() => {
+    it('should get a copy of an object', waitForAsync(() => {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.set('testBehaviorObj', setObject);

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { take, finalize } from 'rxjs/operators';
 import { TestState } from '../../test/test.state';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('@StateReplay', () => {
   let state: TestState;
@@ -20,7 +20,7 @@ describe('@StateReplay', () => {
       expect(state.testReplay$ instanceof Observable).toBeTruthy();
     });
 
-    it('should emit value set with setter', async(() => {
+    it('should emit value set with setter', waitForAsync(() => {
       state.set('testReplay', 'new value');
 
       state.testReplay$
@@ -37,7 +37,7 @@ describe('@StateReplay', () => {
       expect(state.testReplayLength$ instanceof Observable).toBeTruthy();
     });
 
-    it('should replay length provided to decorator', async(() => {
+    it('should replay length provided to decorator', waitForAsync(() => {
       const values = [];
 
       state.set('testReplayLength', 'value 1');
@@ -61,7 +61,7 @@ describe('@StateReplay', () => {
   });
 
   describe('immutability', () => {
-    it('should set a copy of an array', async(() => {
+    it('should set a copy of an array', waitForAsync(() => {
       const setArray = [1, 2, 3];
 
       state.set('testReplayArr', setArray);
@@ -74,7 +74,7 @@ describe('@StateReplay', () => {
         });
     }));
 
-    it('should get a copy of an array', async(() => {
+    it('should get a copy of an array', waitForAsync(() => {
       const setArray = [1, 2, 3];
 
       state.set('testReplayArr', setArray);
@@ -87,7 +87,7 @@ describe('@StateReplay', () => {
         });
     }));
 
-    it('should set a copy of an object', async(() => {
+    it('should set a copy of an object', waitForAsync(() => {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.set('testReplayObj', setObject);
@@ -100,7 +100,7 @@ describe('@StateReplay', () => {
         });
     }));
 
-    it('should get a copy of an object', async(() => {
+    it('should get a copy of an object', waitForAsync(() => {
       const setObject = { one: 1, two: 2, three: 3 };
 
       state.set('testReplayObj', setObject);
