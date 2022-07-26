@@ -8,7 +8,7 @@
   },
   "main": "src/public_api.ts",
   "engines": {
-    "node": ">=10.13"
+    "node": ">=12"
   },
   "scripts": {
     "ng": "ng",
