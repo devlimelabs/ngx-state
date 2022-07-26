@@ -26,7 +26,7 @@
     "@angular-devkit/core" "9.1.15"
     "rxjs" "6.5.4"
 
-"@angular-devkit/build-angular@~14.1.0":
+"@angular-devkit/build-angular@^14.1.0":
   "integrity" "sha512-AtecSuDEPLYd3p7uFVKpoA0XNcq+NvVYFJK8h90BG+IRZtzEm7ZJeYdohXVeVfTO5GvpNFN1XoHxR5rxiXeBhg=="
   "resolved" "https://registry.npmjs.org/@angular-devkit/build-angular/-/build-angular-14.1.0.tgz"
   "version" "14.1.0"
@@ -96,7 +96,7 @@
   optionalDependencies:
     "esbuild" "0.14.49"
 
-"@angular-devkit/build-ng-packagr@~0.901.3":
+"@angular-devkit/build-ng-packagr@^0.901.3":
   "integrity" "sha512-0WMHQ4U527JxIZG9hyLpcK8hKTMbPErzOudyqE9ebNyjhd9e5QGmkzLQEXLks7rSSAxnTpp9Q8jNHK6eVhUJUA=="
   "resolved" "https://registry.npmjs.org/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.901.15.tgz"
   "version" "0.901.15"
@@ -145,7 +145,7 @@
     "ora" "5.4.1"
     "rxjs" "6.6.7"
 
-"@angular/cli@~14.1.0":
+"@angular/cli@^14.1.0":
   "integrity" "sha512-W/t2PkGHu9r87po1ZXQRYU81VtjzNMuGsP5tmoW1pGuibK7Kj+25G+jrXK/WADTi+pjTMXHNXYn8PlMNAIrZ/w=="
   "resolved" "https://registry.npmjs.org/@angular/cli/-/cli-14.1.0.tgz"
   "version" "14.1.0"
@@ -178,7 +178,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/compiler-cli@^14.0.0", "@angular/compiler-cli@^14.0.0 || ^14.0.0-next || ^14.1.0-next", "@angular/compiler-cli@~14.1.0":
+"@angular/compiler-cli@^14.0.0", "@angular/compiler-cli@^14.0.0 || ^14.0.0-next || ^14.1.0-next", "@angular/compiler-cli@^14.1.0":
   "integrity" "sha512-llJkDnv0+riTdRPdOJv/FToz4X9ZO1URnalW+tIe2RyfOzkEqM+VLD/x+3cVgnsaFKuoPxIjZEkMoppGwVB4kg=="
   "resolved" "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-14.1.0.tgz"
   "version" "14.1.0"
@@ -208,7 +208,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/language-service@~14.1.0":
+"@angular/language-service@^14.1.0":
   "integrity" "sha512-ldL4xMDjXYZ93FCEIBVGipx9Qfgr7NuBNO+e25d+nWikXrUOnLfvF4UOL/TSUwSwqN4jxDI2KMNQIF6SecZfvQ=="
   "resolved" "https://registry.npmjs.org/@angular/language-service/-/language-service-14.1.0.tgz"
   "version" "14.1.0"
