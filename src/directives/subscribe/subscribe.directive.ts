@@ -12,7 +12,7 @@ export class SubscribeContext {
 }
 
 @Directive({
-  /* tslint:disable-next-line:directive-selector */
+  /* eslint-disable-next-line @angular-eslint/directive-selector */
   selector: '[subscribe]'
 })
 export class SubscribeDirective implements OnInit, OnDestroy {
@@ -49,7 +49,7 @@ export class SubscribeDirective implements OnInit, OnDestroy {
   }
 
   private unsubscribe(): void {
-    /* tslint:disable-next-line:no-unused-expression */
+    /* eslint-disable-next-line @typescript-eslint/no-unused-expressions */
     this.subscription && this.subscription.unsubscribe();
   }
 }
