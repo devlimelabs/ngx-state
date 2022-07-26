@@ -92,7 +92,6 @@
     ]
   },
   "dependencies": {
-    "karma-coverage": "^2.2.0",
     "tslib": "^2.1.0"
   }
 }
