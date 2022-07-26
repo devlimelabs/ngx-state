@@ -32,7 +32,6 @@
       }
     }
   },
-  "defaultProject": "ngx-state",
   "cli": {
     "analytics": "28ebfb91-5472-49c3-86dc-4a108bc48fc9"
   }
