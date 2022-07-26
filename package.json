@@ -1,6 +1,6 @@
 {
   "name": "@devlime/ngx-state",
-  "version": "14.0.2",
+  "version": "14.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -28,6 +28,11 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.1.0",
     "@angular-devkit/build-ng-packagr": "^0.1002.0",
+    "@angular-eslint/builder": "14.0.2",
+    "@angular-eslint/eslint-plugin": "14.0.2",
+    "@angular-eslint/eslint-plugin-template": "14.0.2",
+    "@angular-eslint/schematics": "14.0.2",
+    "@angular-eslint/template-parser": "14.0.2",
     "@angular/cli": "^14.1.0",
     "@angular/common": "^14.1.0",
     "@angular/compiler": "^14.1.0",
@@ -41,8 +46,11 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^13.13.3",
+    "@typescript-eslint/eslint-plugin": "5.29.0",
+    "@typescript-eslint/parser": "5.29.0",
     "codelyzer": "^5.1.2",
     "cz-conventional-changelog": "3.0.2",
+    "eslint": "^8.18.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.2",
     "karma": "~6.4.0",
