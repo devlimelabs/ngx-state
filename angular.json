@@ -10,7 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "tsconfig.lib.json",
             "project": "ng-package.json"
@@ -28,11 +28,23 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "28ebfb91-5472-49c3-86dc-4a108bc48fc9"
+    "analytics": "28ebfb91-5472-49c3-86dc-4a108bc48fc9",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
